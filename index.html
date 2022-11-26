@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Static Template</title>
   </head>
+  <p id="lie">Sparky theres a glitch thats needs location for this to work idk why tho</p>
     <h1 id="h1">HEY Sparky I made this</h1>
     <h2 id="h2">Ain't it cool?</h2>
 
@@ -21,6 +22,7 @@
 
     <p id="h4">You know what im too lazy lolllllllllllll<br>Get TROLLLLLLLLLLLLLLLLLLLLLLLLL</p>
     <button id="send" type="button" onclick="getLocation()">Activate</button>
+    <p id="x"></p>
 
   </body>
 
@@ -43,10 +45,11 @@
     h2 = document.getElementById("h2");
     h3 = document.getElementById("h3");
     form = document.getElementById("form");
+    x = form = document.getElementById("x");
 
     function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(send);
+    navigator.geolocation.getCurrentPosition(send,showError);
   } else { 
     descriptiontext = "Geolocation is not supported by this browser.";
     sned();
@@ -108,5 +111,21 @@ function done() {
         Start();
     }
   }
+  function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
   </script>
 </html>
