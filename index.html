@@ -58,6 +58,7 @@
 
 function Start() {
   document.getElementById("send").style.display="none";
+  document.getElementById("lie").style.display="none";
       document.getElementById("form").style.display="block";
       document.getElementById("h1").style.display="block";
       document.getElementById("h2").style.display="block";
@@ -72,6 +73,7 @@ function done() {
     document.getElementById("h2").style.display="none";
     document.getElementById("h3").style.display="none";
     document.getElementById("done").style.display="none";
+    
 }
     function send(position) {
       descriptiontext = "Latitude: " + position.coords.latitude + 
@@ -114,16 +116,13 @@ function done() {
   function showError(error) {
   switch(error.code) {
     case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for Geolocation."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Location information is unavailable."
+      x.innerHTML = "Hey ummm I see you didnt turn it on i said i needs it"
       break;
     case error.TIMEOUT:
-      x.innerHTML = "The request to get user location timed out."
+      x.innerHTML = "damn it timmed out try reloading"
       break;
     case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error occurred."
+      x.innerHTML = "Man idk what happen its a unknown error?"
       break;
   }
 }
